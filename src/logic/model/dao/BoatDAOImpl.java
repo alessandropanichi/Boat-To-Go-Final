@@ -44,7 +44,8 @@ public class BoatDAOImpl implements BoatDAO {
 
 		} finally {
 			try {
-				resultSetGB.close();
+				if (resultSetGB != null)
+					resultSetGB.close();
 			} catch (Exception rseGB) {
 				rseGB.printStackTrace();
 			}
