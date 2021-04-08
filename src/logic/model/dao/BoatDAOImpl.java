@@ -50,7 +50,8 @@ public class BoatDAOImpl implements BoatDAO {
 				rseGB.printStackTrace();
 			}
 			try {
-				preparedStatementGB.close();
+				if (preparedStatementGB != null)
+					preparedStatementGB.close();
 			} catch (Exception sseGB) {
 				sseGB.printStackTrace();
 			}
