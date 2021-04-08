@@ -86,12 +86,14 @@ public class BoatDAOImpl implements BoatDAO {
 			eCB.printStackTrace();
 		} finally {
 			try {
-				resultSetCB.close();
+				if (resultSetCB != null)
+					resultSetCB.close();
 			} catch (Exception rseCB) {
 				rseCB.printStackTrace();
 			}
 			try {
-				preparedStatementCB.close();
+				if (preparedStatementCB != null)
+					preparedStatementCB.close();
 			} catch (Exception sseCB) {
 				sseCB.printStackTrace();
 			}
@@ -119,12 +121,14 @@ public class BoatDAOImpl implements BoatDAO {
 			eUB.printStackTrace();
 		} finally {
 			try {
-				preparedStatementUB.close();
+				if (preparedStatementUB != null)
+					preparedStatementUB.close();
 			} catch (Exception sseUB) {
 				sseUB.printStackTrace();
 			}
 			try {
-				connectionUB.close();
+				if (connectionUB != null)
+					connectionUB.close();
 			} catch (Exception cseUB) {
 				cseUB.printStackTrace();
 			}

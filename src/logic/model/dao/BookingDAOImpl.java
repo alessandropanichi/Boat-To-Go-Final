@@ -59,12 +59,14 @@ public class BookingDAOImpl implements BookingDAO {
 
 		} finally {
 			try {
-				resultSetBKB.close();
+				if (resultSetBKB != null)
+					resultSetBKB.close();
 			} catch (Exception rseBKB) {
 				LOGGER.log( Level.SEVERE, rseBKB.toString(), rseBKB );
 			}
 			try {
-				preparedStatementBKB.close();
+				if (preparedStatementBKB != null)
+					preparedStatementBKB.close();
 			} catch (Exception sseBKB) {
 				LOGGER.log( Level.SEVERE, sseBKB.toString(), sseBKB );
 			}
@@ -100,12 +102,14 @@ public class BookingDAOImpl implements BookingDAO {
 
 		} finally {
 			try {
-				resultSetBKU.close();
+				if (resultSetBKU != null)
+					resultSetBKU.close();
 			} catch (Exception rseBKU) {
 				LOGGER.log( Level.SEVERE, rseBKU.toString(), rseBKU );
 			}
 			try {
-				preparedStatementBKU.close();
+				if (preparedStatementBKU != null)
+					preparedStatementBKU.close();
 			} catch (Exception sseBKU) {
 				LOGGER.log( Level.SEVERE, sseBKU.toString(), sseBKU );
 			}
@@ -140,12 +144,14 @@ public class BookingDAOImpl implements BookingDAO {
 			LOGGER.log( Level.SEVERE, eCBK.toString(), eCBK );
 		} finally {
 			try {
-				resultSetCBK.close();
+				if (resultSetCBK != null)
+					resultSetCBK.close();
 			} catch (Exception rseCBK) {
 				LOGGER.log( Level.SEVERE, rseCBK.toString(), rseCBK );
 			}
 			try {
-				preparedStatementCBK.close();
+				if (preparedStatementCBK != null)
+					preparedStatementCBK.close();
 			} catch (Exception sseCBK) {
 				LOGGER.log( Level.SEVERE, sseCBK.toString(), sseCBK );
 			}
@@ -171,7 +177,8 @@ public class BookingDAOImpl implements BookingDAO {
 			LOGGER.log( Level.SEVERE, eUBK.toString(), eUBK );
 		} finally {
 			try {
-				preparedStatementUBK.close();
+				if (preparedStatementUBK != null)
+					preparedStatementUBK.close();
 			} catch (Exception sseUBK) {
 				LOGGER.log( Level.SEVERE, sseUBK.toString(), sseUBK );
 			}
@@ -206,12 +213,14 @@ public class BookingDAOImpl implements BookingDAO {
 
 		} finally {
 			try {
-				resultSetGBK.close();
+				if (resultSetGBK != null)
+					resultSetGBK.close();
 			} catch (Exception rseGBK) {
 				LOGGER.log( Level.SEVERE, rseGBK.toString(), rseGBK );
 			}
 			try {
-				preparedStatementGBK.close();
+				if (preparedStatementGBK != null)
+					preparedStatementGBK.close();
 			} catch (Exception sseGBK) {
 				LOGGER.log( Level.SEVERE, sseGBK.toString(), sseGBK );
 			}

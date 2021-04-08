@@ -48,12 +48,14 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 
 		} finally {
 			try {
-				resultSetGABS.close();
+				if (resultSetGABS != null)
+					resultSetGABS.close();
 			} catch (Exception rseGABS) {
 				rseGABS.printStackTrace();
 			}
 			try {
-				preparedStatementGABS.close();
+				if (preparedStatementGABS != null)
+					preparedStatementGABS.close();
 			} catch (Exception sseGABS) {
 				sseGABS.printStackTrace();
 			}
@@ -86,12 +88,14 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 
 		} finally {
 			try {
-				resultSetGBS.close();
+				if (resultSetGBS != null)
+					resultSetGBS.close();
 			} catch (Exception rseGBS) {
 				rseGBS.printStackTrace();
 			}
 			try {
-				preparedStatementGBS.close();
+				if (preparedStatementGBS != null)
+					preparedStatementGBS.close();
 			} catch (Exception sseGBS) {
 				sseGBS.printStackTrace();
 			}
@@ -125,12 +129,14 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 			eCBS.printStackTrace();
 		} finally {
 			try {
-				resultSetCBS.close();
+				if (resultSetCBS != null)
+					resultSetCBS.close();
 			} catch (Exception rseCBS) {
 				rseCBS.printStackTrace();
 			}
 			try {
-				preparedStatementCBS.close();
+				if (preparedStatementCBS != null)
+					preparedStatementCBS.close();
 			} catch (Exception sseCBS) {
 				sseCBS.printStackTrace();
 			}
@@ -159,12 +165,14 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 			eUBS.printStackTrace();
 		} finally {
 			try {
-				preparedStatementUBS.close();
+				if (preparedStatementUBS != null)
+					preparedStatementUBS.close();
 			} catch (Exception sseUBS) {
 				sseUBS.printStackTrace();
 			}
 			try {
-				connectionUBS.close();
+				if (connectionUBS != null)
+					connectionUBS.close();
 			} catch (Exception cseUBS) {
 				cseUBS.printStackTrace();
 			}
@@ -202,12 +210,14 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 
 		} finally {
 			try {
-				resultSetGBSO.close();
+				if (resultSetGBSO != null)
+					resultSetGBSO.close();
 			} catch (Exception rseGBSO) {
 				rseGBSO.printStackTrace();
 			}
 			try {
-				preparedStatementGBSO.close();
+				if (preparedStatementGBSO != null)
+					preparedStatementGBSO.close();
 			} catch (Exception sseGBSO) {
 				sseGBSO.printStackTrace();
 			}

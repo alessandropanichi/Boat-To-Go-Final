@@ -42,12 +42,14 @@ public class PersonDAOImpl implements PersonDAO {
 
 		} finally {
 			try {
-				resultSetPB.close();
+				if (resultSetPB != null)
+					resultSetPB.close();
 			} catch (Exception rsePB) {
 				rsePB.printStackTrace();
 			}
 			try {
-				preparedStatementPB.close();
+				if (preparedStatementPB != null)
+					preparedStatementPB.close();
 			} catch (Exception ssePB) {
 				ssePB.printStackTrace();
 			}
@@ -81,12 +83,14 @@ public class PersonDAOImpl implements PersonDAO {
 			eCP.printStackTrace();
 		} finally {
 			try {
-				resultSetCP.close();
+				if (resultSetCP != null)
+					resultSetCP.close();
 			} catch (Exception rseCP) {
 				rseCP.printStackTrace();
 			}
 			try {
-				preparedStatementCP.close();
+				if (preparedStatementCP != null)
+					preparedStatementCP.close();
 			} catch (Exception sseCP) {
 				sseCP.printStackTrace();
 			}
