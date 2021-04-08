@@ -25,114 +25,114 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 
 	@Override
 	public List<BoatShopBean> getAllBoatShopByCity(String city) {
-		List<BoatShopBean> boatShops = new ArrayList<>();
-		BoatShopBean boatShop = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		List<BoatShopBean> boatShopsGABS = new ArrayList<>();
+		BoatShopBean boatShopGABS = null;
+		Connection connectionGABS = null;
+		PreparedStatement preparedStatementGABS = null;
+		ResultSet resultSetGABS = null;
 
 		try {
-			connection = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(READ_BY_CITY_QUERY);
-			preparedStatement.setString(1, city);
-			preparedStatement.execute();
-			resultSet = preparedStatement.getResultSet();
+			connectionGABS = DatabaseConnection.getInstance().getConnection();
+			preparedStatementGABS = connectionGABS.prepareStatement(READ_BY_CITY_QUERY);
+			preparedStatementGABS.setString(1, city);
+			preparedStatementGABS.execute();
+			resultSetGABS = preparedStatementGABS.getResultSet();
 
-			while (resultSet.next()) {
-				boatShop = new BoatShopBean(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-						resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
-				boatShops.add(boatShop);
+			while (resultSetGABS.next()) {
+				boatShopGABS = new BoatShopBean(resultSetGABS.getString(1), resultSetGABS.getString(2), resultSetGABS.getString(3),
+						resultSetGABS.getString(4), resultSetGABS.getString(5), resultSetGABS.getInt(6));
+				boatShopsGABS.add(boatShopGABS);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException eGABS) {
+			eGABS.printStackTrace();
 
 		} finally {
 			try {
-				resultSet.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
+				resultSetGABS.close();
+			} catch (Exception rseGABS) {
+				rseGABS.printStackTrace();
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
+				preparedStatementGABS.close();
+			} catch (Exception sseGABS) {
+				sseGABS.printStackTrace();
 			}
 
 		}
 
-		return boatShops;
+		return boatShopsGABS;
 	}
 
 	@Override
 	public BoatShopBean getBoatShop(int id) {
-		BoatShopBean boatShop = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		BoatShopBean boatShopGBS = null;
+		Connection connectionGBS = null;
+		PreparedStatement preparedStatementGBS = null;
+		ResultSet resultSetGBS = null;
 
 		try {
-			connection = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(READ_QUERY);
-			preparedStatement.setInt(1, id);
-			preparedStatement.execute();
-			resultSet = preparedStatement.getResultSet();
+			connectionGBS = DatabaseConnection.getInstance().getConnection();
+			preparedStatementGBS = connectionGBS.prepareStatement(READ_QUERY);
+			preparedStatementGBS.setInt(1, id);
+			preparedStatementGBS.execute();
+			resultSetGBS = preparedStatementGBS.getResultSet();
 
-			if (resultSet.next()) {
-				boatShop = new BoatShopBean(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-						resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
+			if (resultSetGBS.next()) {
+				boatShopGBS = new BoatShopBean(resultSetGBS.getString(1), resultSetGBS.getString(2), resultSetGBS.getString(3),
+						resultSetGBS.getString(4), resultSetGBS.getString(5), resultSetGBS.getInt(6));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException eGBS) {
+			eGBS.printStackTrace();
 
 		} finally {
 			try {
-				resultSet.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
+				resultSetGBS.close();
+			} catch (Exception rseGBS) {
+				rseGBS.printStackTrace();
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
+				preparedStatementGBS.close();
+			} catch (Exception sseGBS) {
+				sseGBS.printStackTrace();
 			}
 		}
 
-		return boatShop;
+		return boatShopGBS;
 	}
 
 	@Override
 	public int createBoatShop(BoatShopBean boatShop) {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+		Connection connectionCBS = null;
+		PreparedStatement preparedStatementCBS = null;
+		ResultSet resultSetCBS = null;
 		try {
-			conn = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setString(1, boatShop.getName());
-			preparedStatement.setString(2, boatShop.getAddress());
-			preparedStatement.setString(3, boatShop.getCity());
-			preparedStatement.setString(4, boatShop.getDescription());
-			preparedStatement.setString(5, boatShop.getOwner());
-			preparedStatement.execute();
-			result = preparedStatement.getGeneratedKeys();
+			connectionCBS = DatabaseConnection.getInstance().getConnection();
+			preparedStatementCBS = connectionCBS.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
+			preparedStatementCBS.setString(1, boatShop.getName());
+			preparedStatementCBS.setString(2, boatShop.getAddress());
+			preparedStatementCBS.setString(3, boatShop.getCity());
+			preparedStatementCBS.setString(4, boatShop.getDescription());
+			preparedStatementCBS.setString(5, boatShop.getOwner());
+			preparedStatementCBS.execute();
+			resultSetCBS = preparedStatementCBS.getGeneratedKeys();
 
-			if (result.next()) {
-				return result.getInt(1);
+			if (resultSetCBS.next()) {
+				return resultSetCBS.getInt(1);
 			} else {
 				return -1;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException eCBS) {
+			eCBS.printStackTrace();
 		} finally {
 			try {
-				result.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
+				resultSetCBS.close();
+			} catch (Exception rseCBS) {
+				rseCBS.printStackTrace();
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
+				preparedStatementCBS.close();
+			} catch (Exception sseCBS) {
+				sseCBS.printStackTrace();
 			}
 		}
 
@@ -141,32 +141,32 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 
 	@Override
 	public boolean updateBoatShop(BoatShopBean boatShop) {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
+		Connection connectionUBS = null;
+		PreparedStatement preparedStatementUBS = null;
 		try {
-			conn = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = conn.prepareStatement(UPDATE_QUERY);
-			preparedStatement.setString(1, boatShop.getName());
-			preparedStatement.setString(2, boatShop.getAddress());
-			preparedStatement.setString(3, boatShop.getCity());
-			preparedStatement.setString(4, boatShop.getDescription());
-			preparedStatement.setString(5, boatShop.getOwner());
-			preparedStatement.setInt(6, boatShop.getId());
+			connectionUBS = DatabaseConnection.getInstance().getConnection();
+			preparedStatementUBS = connectionUBS.prepareStatement(UPDATE_QUERY);
+			preparedStatementUBS.setString(1, boatShop.getName());
+			preparedStatementUBS.setString(2, boatShop.getAddress());
+			preparedStatementUBS.setString(3, boatShop.getCity());
+			preparedStatementUBS.setString(4, boatShop.getDescription());
+			preparedStatementUBS.setString(5, boatShop.getOwner());
+			preparedStatementUBS.setInt(6, boatShop.getId());
 
-			preparedStatement.execute();
+			preparedStatementUBS.execute();
 			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException eUBS) {
+			eUBS.printStackTrace();
 		} finally {
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
+				preparedStatementUBS.close();
+			} catch (Exception sseUBS) {
+				sseUBS.printStackTrace();
 			}
 			try {
-				conn.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
+				connectionUBS.close();
+			} catch (Exception cseUBS) {
+				cseUBS.printStackTrace();
 			}
 		}
 		return false;
@@ -179,42 +179,42 @@ public class BoatShopDAOImpl implements BoatShopDAO {
 
 	@Override
 	public List<BoatShopBean> getAllBoatShopByOwner(String owner) {
-		List<BoatShopBean> boatShops = new ArrayList<>();
-		BoatShopBean boatShop = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		List<BoatShopBean> boatShopsGBSO = new ArrayList<>();
+		BoatShopBean boatShopGBSO = null;
+		Connection connectionGBSO = null;
+		PreparedStatement preparedStatementGBSO = null;
+		ResultSet resultSetGBSO = null;
 
 		try {
-			connection = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(READ_BY_OWNER_QUERY);
-			preparedStatement.setString(1, owner);
-			preparedStatement.execute();
-			resultSet = preparedStatement.getResultSet();
+			connectionGBSO = DatabaseConnection.getInstance().getConnection();
+			preparedStatementGBSO = connectionGBSO.prepareStatement(READ_BY_OWNER_QUERY);
+			preparedStatementGBSO.setString(1, owner);
+			preparedStatementGBSO.execute();
+			resultSetGBSO = preparedStatementGBSO.getResultSet();
 
-			while (resultSet.next()) {
-				boatShop = new BoatShopBean(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-						resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
-				boatShops.add(boatShop);
+			while (resultSetGBSO.next()) {
+				boatShopGBSO = new BoatShopBean(resultSetGBSO.getString(1), resultSetGBSO.getString(2), resultSetGBSO.getString(3),
+						resultSetGBSO.getString(4), resultSetGBSO.getString(5), resultSetGBSO.getInt(6));
+				boatShopsGBSO.add(boatShopGBSO);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException eGBSO) {
+			eGBSO.printStackTrace();
 
 		} finally {
 			try {
-				resultSet.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
+				resultSetGBSO.close();
+			} catch (Exception rseGBSO) {
+				rseGBSO.printStackTrace();
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
+				preparedStatementGBSO.close();
+			} catch (Exception sseGBSO) {
+				sseGBSO.printStackTrace();
 			}
 
 		}
 
-		return boatShops;
+		return boatShopsGBSO;
 	}
 
 }

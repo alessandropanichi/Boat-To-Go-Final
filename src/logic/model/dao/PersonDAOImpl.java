@@ -19,76 +19,76 @@ public class PersonDAOImpl implements PersonDAO {
 
 	@Override
 	public List<Person> getAllPeopleOfABooking(int bookingId) {
-		List<Person> people = new ArrayList<>();
-		Person person = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		List<Person> peoplePB = new ArrayList<>();
+		Person personPB = null;
+		Connection connectionPB = null;
+		PreparedStatement preparedStatementPB = null;
+		ResultSet resultSetPB = null;
 
 		try {
-			connection = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(READ_ALL_PEOPLE_BY_BOOKING_ID_QUERY);
-			preparedStatement.setInt(1, bookingId);
-			preparedStatement.execute();
-			resultSet = preparedStatement.getResultSet();
+			connectionPB = DatabaseConnection.getInstance().getConnection();
+			preparedStatementPB = connectionPB.prepareStatement(READ_ALL_PEOPLE_BY_BOOKING_ID_QUERY);
+			preparedStatementPB.setInt(1, bookingId);
+			preparedStatementPB.execute();
+			resultSetPB = preparedStatementPB.getResultSet();
 
-			while (resultSet.next()) {
-				person = new Person(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-						resultSet.getInt(4));
-				people.add(person);
+			while (resultSetPB.next()) {
+				personPB = new Person(resultSetPB.getString(1), resultSetPB.getString(2), resultSetPB.getString(3),
+						resultSetPB.getInt(4));
+				peoplePB.add(personPB);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ePB) {
+			ePB.printStackTrace();
 
 		} finally {
 			try {
-				resultSet.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
+				resultSetPB.close();
+			} catch (Exception rsePB) {
+				rsePB.printStackTrace();
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
+				preparedStatementPB.close();
+			} catch (Exception ssePB) {
+				ssePB.printStackTrace();
 			}
 
 		}
 
-		return people;
+		return peoplePB;
 	}
 
 	@Override
 	public int createPerson(Person person, int idBooking) {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+		Connection connectionCP = null;
+		PreparedStatement preparedStatementCP = null;
+		ResultSet resultSetCP = null;
 		try {
-			conn = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setString(1, person.getFiscalCode());
-			preparedStatement.setString(2, person.getName());
-			preparedStatement.setString(3, person.getLastname());
-			preparedStatement.setInt(4, idBooking);
-			preparedStatement.execute();
-			result = preparedStatement.getGeneratedKeys();
+			connectionCP = DatabaseConnection.getInstance().getConnection();
+			preparedStatementCP = connectionCP.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
+			preparedStatementCP.setString(1, person.getFiscalCode());
+			preparedStatementCP.setString(2, person.getName());
+			preparedStatementCP.setString(3, person.getLastname());
+			preparedStatementCP.setInt(4, idBooking);
+			preparedStatementCP.execute();
+			resultSetCP = preparedStatementCP.getGeneratedKeys();
 
-			if (result.next()) {
-				return result.getInt(1);
+			if (resultSetCP.next()) {
+				return resultSetCP.getInt(1);
 			} else {
 				return -1;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException eCP) {
+			eCP.printStackTrace();
 		} finally {
 			try {
-				result.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
+				resultSetCP.close();
+			} catch (Exception rseCP) {
+				rseCP.printStackTrace();
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
+				preparedStatementCP.close();
+			} catch (Exception sseCP) {
+				sseCP.printStackTrace();
 			}
 
 		}

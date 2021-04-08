@@ -35,119 +35,119 @@ public class BookingDAOImpl implements BookingDAO {
 
 	@Override
 	public List<BookingBean> getAllBookingOfABoat(int boatId) {
-		List<BookingBean> bookings = new ArrayList<>();
-		BookingBean booking = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		List<BookingBean> bookingsBKB = new ArrayList<>();
+		BookingBean bookingBKB = null;
+		Connection connectionBKB = null;
+		PreparedStatement preparedStatementBKB = null;
+		ResultSet resultSetBKB = null;
 
 		try {
-			connection = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(READ_ALL_BY_BOAT_ID_QUERY);
-			preparedStatement.setInt(1, boatId);
-			preparedStatement.execute();
-			resultSet = preparedStatement.getResultSet();
+			connectionBKB = DatabaseConnection.getInstance().getConnection();
+			preparedStatementBKB = connectionBKB.prepareStatement(READ_ALL_BY_BOAT_ID_QUERY);
+			preparedStatementBKB.setInt(1, boatId);
+			preparedStatementBKB.execute();
+			resultSetBKB = preparedStatementBKB.getResultSet();
 
-			while (resultSet.next()) {
-				booking = new BookingBean(resultSet.getString(1), resultSet.getDate(2).toLocalDate(),
-						resultSet.getDate(3).toLocalDate(), StateEnum.valueOf(resultSet.getString(4)),
-						resultSet.getString(5), resultSet.getInt(6));
-				bookings.add(booking);
+			while (resultSetBKB.next()) {
+				bookingBKB = new BookingBean(resultSetBKB.getString(1), resultSetBKB.getDate(2).toLocalDate(),
+						resultSetBKB.getDate(3).toLocalDate(), StateEnum.valueOf(resultSetBKB.getString(4)),
+						resultSetBKB.getString(5), resultSetBKB.getInt(6));
+				bookingsBKB.add(bookingBKB);
 			}
-		} catch (SQLException e) {
-			LOGGER.log( Level.SEVERE, e.toString(), e );
+		} catch (SQLException eBKB) {
+			LOGGER.log( Level.SEVERE, eBKB.toString(), eBKB );
 
 		} finally {
 			try {
-				resultSet.close();
-			} catch (Exception rse) {
-				LOGGER.log( Level.SEVERE, rse.toString(), rse );
+				resultSetBKB.close();
+			} catch (Exception rseBKB) {
+				LOGGER.log( Level.SEVERE, rseBKB.toString(), rseBKB );
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				LOGGER.log( Level.SEVERE, sse.toString(), sse );
+				preparedStatementBKB.close();
+			} catch (Exception sseBKB) {
+				LOGGER.log( Level.SEVERE, sseBKB.toString(), sseBKB );
 			}
 
 		}
 
-		return bookings;
+		return bookingsBKB;
 	}
 
 	@Override
 	public List<BookingBean> getAllBookingOfAUser(String username) {
-		List<BookingBean> bookings = new ArrayList<>();
-		BookingBean booking = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		List<BookingBean> bookingsBKU = new ArrayList<>();
+		BookingBean bookingBKU = null;
+		Connection connectionBKU = null;
+		PreparedStatement preparedStatementBKU = null;
+		ResultSet resultSetBKU = null;
 
 		try {
-			connection = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(READ_ALL_BY_USER_QUERY);
-			preparedStatement.setString(1, username);
-			preparedStatement.execute();
-			resultSet = preparedStatement.getResultSet();
+			connectionBKU = DatabaseConnection.getInstance().getConnection();
+			preparedStatementBKU = connectionBKU.prepareStatement(READ_ALL_BY_USER_QUERY);
+			preparedStatementBKU.setString(1, username);
+			preparedStatementBKU.execute();
+			resultSetBKU = preparedStatementBKU.getResultSet();
 
-			while (resultSet.next()) {
-				booking = new BookingBean(resultSet.getString(1), resultSet.getDate(2).toLocalDate(),
-						resultSet.getDate(3).toLocalDate(), StateEnum.valueOf(resultSet.getString(4)),
-						resultSet.getString(5), resultSet.getInt(6));
-				bookings.add(booking);
+			while (resultSetBKU.next()) {
+				bookingBKU = new BookingBean(resultSetBKU.getString(1), resultSetBKU.getDate(2).toLocalDate(),
+						resultSetBKU.getDate(3).toLocalDate(), StateEnum.valueOf(resultSetBKU.getString(4)),
+						resultSetBKU.getString(5), resultSetBKU.getInt(6));
+				bookingsBKU.add(bookingBKU);
 			}
-		} catch (SQLException e) {
-			LOGGER.log( Level.SEVERE, e.toString(), e );
+		} catch (SQLException eBKU) {
+			LOGGER.log( Level.SEVERE, eBKU.toString(), eBKU );
 
 		} finally {
 			try {
-				resultSet.close();
-			} catch (Exception rse) {
-				LOGGER.log( Level.SEVERE, rse.toString(), rse );
+				resultSetBKU.close();
+			} catch (Exception rseBKU) {
+				LOGGER.log( Level.SEVERE, rseBKU.toString(), rseBKU );
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				LOGGER.log( Level.SEVERE, sse.toString(), sse );
+				preparedStatementBKU.close();
+			} catch (Exception sseBKU) {
+				LOGGER.log( Level.SEVERE, sseBKU.toString(), sseBKU );
 			}
 
 		}
 
-		return bookings;
+		return bookingsBKU;
 	}
 
 	@Override
 	public int createBooking(BookingBean booking, int boatId) {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+		Connection connectionCBK = null;
+		PreparedStatement preparedStatementCBK = null;
+		ResultSet resultSetCBK = null;
 		try {
-			conn = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setDate(1, Date.valueOf(booking.getCheckIn()));
-			preparedStatement.setDate(2, Date.valueOf(booking.getCheckOut()));
-			preparedStatement.setString(3, String.valueOf(booking.getState()));
-			preparedStatement.setString(4, booking.getUser());
-			preparedStatement.setInt(5, boatId);
-			preparedStatement.execute();
-			result = preparedStatement.getGeneratedKeys();
+			connectionCBK = DatabaseConnection.getInstance().getConnection();
+			preparedStatementCBK = connectionCBK.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
+			preparedStatementCBK.setDate(1, Date.valueOf(booking.getCheckIn()));
+			preparedStatementCBK.setDate(2, Date.valueOf(booking.getCheckOut()));
+			preparedStatementCBK.setString(3, String.valueOf(booking.getState()));
+			preparedStatementCBK.setString(4, booking.getUser());
+			preparedStatementCBK.setInt(5, boatId);
+			preparedStatementCBK.execute();
+			resultSetCBK = preparedStatementCBK.getGeneratedKeys();
 
-			if (result.next()) {
-				return result.getInt(1);
+			if (resultSetCBK.next()) {
+				return resultSetCBK.getInt(1);
 			} else {
 				return -1;
 			}
-		} catch (SQLException e) {
-			LOGGER.log( Level.SEVERE, e.toString(), e );
+		} catch (SQLException eCBK) {
+			LOGGER.log( Level.SEVERE, eCBK.toString(), eCBK );
 		} finally {
 			try {
-				result.close();
-			} catch (Exception rse) {
-				LOGGER.log( Level.SEVERE, rse.toString(), rse );
+				resultSetCBK.close();
+			} catch (Exception rseCBK) {
+				LOGGER.log( Level.SEVERE, rseCBK.toString(), rseCBK );
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				LOGGER.log( Level.SEVERE, sse.toString(), sse );
+				preparedStatementCBK.close();
+			} catch (Exception sseCBK) {
+				LOGGER.log( Level.SEVERE, sseCBK.toString(), sseCBK );
 			}
 
 		}
@@ -157,23 +157,23 @@ public class BookingDAOImpl implements BookingDAO {
 
 	@Override
 	public boolean updateBooking(BookingBean booking) {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
+		Connection connectionUBK = null;
+		PreparedStatement preparedStatementUBK = null;
 		try {
-			conn = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = conn.prepareStatement(UPDATE_QUERY);
-			preparedStatement.setString(1, String.valueOf(booking.getState()));
-			preparedStatement.setInt(2, booking.getBookingId());
+			connectionUBK = DatabaseConnection.getInstance().getConnection();
+			preparedStatementUBK = connectionUBK.prepareStatement(UPDATE_QUERY);
+			preparedStatementUBK.setString(1, String.valueOf(booking.getState()));
+			preparedStatementUBK.setInt(2, booking.getBookingId());
 
-			preparedStatement.execute();
+			preparedStatementUBK.execute();
 			return true;
-		} catch (SQLException e) {
-			LOGGER.log( Level.SEVERE, e.toString(), e );
+		} catch (SQLException eUBK) {
+			LOGGER.log( Level.SEVERE, eUBK.toString(), eUBK );
 		} finally {
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				LOGGER.log( Level.SEVERE, sse.toString(), sse );
+				preparedStatementUBK.close();
+			} catch (Exception sseUBK) {
+				LOGGER.log( Level.SEVERE, sseUBK.toString(), sseUBK );
 			}
 		}
 		return false;
@@ -181,43 +181,43 @@ public class BookingDAOImpl implements BookingDAO {
 
 	@Override
 	public BookingBean getBooking(int id) {
-		BookingBean booking = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		BookingBean bookingGBK = null;
+		Connection connectionGBK = null;
+		PreparedStatement preparedStatementGBK = null;
+		ResultSet resultSetGBK = null;
 
 		try {
-			connection = DatabaseConnection.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(READ_QUERY);
-			preparedStatement.setInt(1, id);
-			preparedStatement.execute();
-			resultSet = preparedStatement.getResultSet();
+			connectionGBK = DatabaseConnection.getInstance().getConnection();
+			preparedStatementGBK = connectionGBK.prepareStatement(READ_QUERY);
+			preparedStatementGBK.setInt(1, id);
+			preparedStatementGBK.execute();
+			resultSetGBK = preparedStatementGBK.getResultSet();
 
-			if (resultSet.next()) {
-				booking = new BookingBean();
-				booking.setCheckIn(resultSet.getDate(1).toLocalDate());
-				booking.setCheckOut(resultSet.getDate(2).toLocalDate());
-				booking.setState(StateEnum.valueOf(resultSet.getString(3)));
-				booking.setUser(resultSet.getString(4));
-				booking.setBookingId(resultSet.getInt(5));
+			if (resultSetGBK.next()) {
+				bookingGBK = new BookingBean();
+				bookingGBK.setCheckIn(resultSetGBK.getDate(1).toLocalDate());
+				bookingGBK.setCheckOut(resultSetGBK.getDate(2).toLocalDate());
+				bookingGBK.setState(StateEnum.valueOf(resultSetGBK.getString(3)));
+				bookingGBK.setUser(resultSetGBK.getString(4));
+				bookingGBK.setBookingId(resultSetGBK.getInt(5));
 			}
-		} catch (SQLException e) {
-			LOGGER.log( Level.SEVERE, e.toString(), e );
+		} catch (SQLException eGBK) {
+			LOGGER.log( Level.SEVERE, eGBK.toString(), eGBK );
 
 		} finally {
 			try {
-				resultSet.close();
-			} catch (Exception rse) {
-				LOGGER.log( Level.SEVERE, rse.toString(), rse );
+				resultSetGBK.close();
+			} catch (Exception rseGBK) {
+				LOGGER.log( Level.SEVERE, rseGBK.toString(), rseGBK );
 			}
 			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				LOGGER.log( Level.SEVERE, sse.toString(), sse );
+				preparedStatementGBK.close();
+			} catch (Exception sseGBK) {
+				LOGGER.log( Level.SEVERE, sseGBK.toString(), sseGBK );
 			}
 		}
 
-		return booking;
+		return bookingGBK;
 	}
 
 }
