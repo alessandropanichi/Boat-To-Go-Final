@@ -100,6 +100,7 @@ public class BookingServlet extends HttpServlet {
 		int boatShopID = (int) request.getSession().getAttribute("boatShopid");
 		RentalShop boatShop = BookBoatShopController.getInstance().getRentalShop(boatShopID);
 		
+		@SuppressWarnings("unchecked")
 		List<BoatBean> boatBeans = (List<BoatBean>)request.getSession().getAttribute("boats");
 		
 		BookBoatShopController.getInstance().createBooking(fields, peopleList, boatBeans, boatShop);

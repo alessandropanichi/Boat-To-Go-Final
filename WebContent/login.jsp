@@ -24,9 +24,9 @@
     	<c:if test="${error.equals('Username/password are wrong.') }">
     		<c:set var="valide" value="form-control is-invalid"></c:set>
     	</c:if>
-    	<input type="text" id="inputEmail" class="${valide }" placeholder="Username" required="" autofocus="" name="username" autocomplete="off">
+    	<input type="text" id="inputEmail" class="${valide }" placeholder="Username" name="username" autocomplete="off" required autofocus>
     	<label for="inputPassword" class="sr-only">Password</label>
-    	<input type="password" id="inputPassword" class="${valide }" placeholder="Password" required="" name="password">
+    	<input type="password" id="inputPassword" class="${valide }" placeholder="Password" name="password" required>
     	<c:if test="${error.equals('Username/password are wrong.') }">
     		<div class="invalid-feedback">
     			${error }<br>
